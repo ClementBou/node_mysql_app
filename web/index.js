@@ -11,27 +11,29 @@ const connection = mysql.createPool({
 });
 
 app.get("/", (req, res) => {
+
+
   connection.query("INSERT INTO Poeple(student_name,student_age)VALUES(\"Clement Boulanger\", 22);", (err, rows) => {
     if (err) {
-      connection.query("CREATE TABLE Poeple(student_id INT PRIMARY KEY AUTO_INCREMENT, student_name VARCHAR(60), student_age INT);", (err, rows) => {
-        if(err){
+      connection.query("CREATE TABLE Poeple(student_id INT PRIMARY KEY AUTO_INCREMENT, student_name VARCHAR(60), student_age INT);", (err1, rows) => {
+        if(err1){
           res.json({
             success: false,
-            err,
+            err1,
           });
         }else{
-          connection.query("INSERT INTO Poeple(student_name,student_age)VALUES(\"Clement Boulanger\", 22);", (err, rows) => {
-            if(err){
+          connection.query("INSERT INTO Poeple(student_name,student_age)VALUES(\"Clement Boulanger\", 22);", (err2, rows) => {
+            if(err2){
               res.json({
                 success: false,
-                err,
+                err2,
               });
             }else{
-              connection.query("SELECT * FROM Poeple", (err, rows) => {
-                if (err) {
+              connection.query("SELECT * FROM Poeple", (err3, rows) => {
+                if (err3) {
                   res.json({
                     success: false,
-                    err,
+                    err3,
                   });
                 } else {
                   res.json({
@@ -45,11 +47,11 @@ app.get("/", (req, res) => {
         }
       });
     } else {
-      connection.query("SELECT * FROM Poeple", (err, rows) => {
-        if (err) {
+      connection.query("SELECT * FROM Poeple", (err2, rows) => {
+        if (err2) {
           res.json({
             success: false,
-            err,
+            err2,
           });
         } else {
           res.json({
@@ -57,19 +59,6 @@ app.get("/", (req, res) => {
             rows,
           });
         }
-      });
-    }
-  });
-  connection.query("SELECT * FROM Poeple", (err, rows) => {
-    if (err) {
-      res.json({
-        success: false,
-        err,
-      });
-    } else {
-      res.json({
-        success: true,
-        rows,
       });
     }
   });
